@@ -1,0 +1,31 @@
+/* Auth Layout */
+:root {
+  --auth-page-border-radius: 1rem;
+}
+
+.auth-layout {
+  height: 100%;
+}
+
+.auth-illustration-container {
+  background-color: var(--main);
+  border-top-right-radius: var(--auth-page-border-radius);
+  border-bottom-right-radius: var(--auth-page-border-radius);
+}
+
+.welcome-title {
+  color: var(--white);
+  text-align: center;
+}
+
+/* Desktop */
+@media only screen and (width >= 1024px) {
+  .auth-illustration {
+    width: 40em;
+  }
+
+  .welcome-title {
+    font-size: 2em;
+    width: 25em;
+  }
+}

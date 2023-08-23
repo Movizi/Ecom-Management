@@ -1,0 +1,21 @@
+/* Portal Layout */
+.portal-layout,
+.portal-layout .ant-layout {
+  height: 100%;
+}
+
+main.ant-layout-content > div {
+  max-height: 100%;
+  overflow: auto;
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+/* Desktop */
+@media only screen and (width >= 1024px) {
+  main.ant-layout-content {
+    padding: 2em;
+  }
+}

@@ -1,0 +1,23 @@
+/* Navbar */
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+header.ant-layout-header {
+  display: flex;
+  align-items: center;
+}
+
+/* Desktop */
+@media only screen and (width >= 1024px) {
+  header.ant-layout-header {
+    padding: 1em 2em;
+  }
+}
