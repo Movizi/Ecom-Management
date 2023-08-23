@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useRootContext } from "../../hooks/useRootContext";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/navbar/Navbar";
 import { Layout } from "antd";
 
 const { Content } = Layout;
