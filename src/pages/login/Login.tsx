@@ -75,6 +75,7 @@ function Login() {
             rules={[{ required: true, message: "Please input your username!" }]}
           >
             <Input
+            className="input"
               prefix={
                 <svg
                   width={24}
@@ -101,6 +102,8 @@ function Login() {
             rules={[{ required: true, message: "Please input your password!" }]}
           >
             <Input.Password
+                        className="input"
+
               prefix={
                 <svg
                   width={24}

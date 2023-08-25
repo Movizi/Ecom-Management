@@ -6,7 +6,7 @@
 
 main.ant-layout-content > div {
   max-height: 100%;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .site-layout .site-layout-background {
@@ -16,6 +16,6 @@ main.ant-layout-content > div {
 /* Desktop */
 @media only screen and (width >= 1024px) {
   main.ant-layout-content {
-    padding: 2em;
+    padding: 1em 2em;
   }
 }

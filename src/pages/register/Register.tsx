@@ -78,6 +78,7 @@ function Register() {
             ]}
           >
             <Input
+              className="input"
               prefix={
                 <svg
                   width={24}
@@ -106,6 +107,7 @@ function Register() {
             ]}
           >
             <Input
+              className="input"
               prefix={
                 <svg
                   width={24}
@@ -132,6 +134,7 @@ function Register() {
             rules={[{ required: true, message: "Please input your username!" }]}
           >
             <Input
+              className="input"
               prefix={
                 <svg
                   width={24}
@@ -158,6 +161,7 @@ function Register() {
             rules={[{ required: true, message: "Please input your email!" }]}
           >
             <Input
+              className="input"
               prefix={
                 <svg
                   width={24}
@@ -184,6 +188,7 @@ function Register() {
             rules={[{ required: true, message: "Please input your password!" }]}
           >
             <Input.Password
+              className="input"
               prefix={
                 <svg
                   width={24}
