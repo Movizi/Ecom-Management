@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactNode, createContext, useState } from "react";
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 type RootContextProviderProps = {
   children: ReactNode;
@@ -10,10 +10,10 @@ type UrlType = "https://localhost:44301/api";
 
 export interface RootContextType {
   apiUrl: UrlType;
-  fetchData: <T>(
+  fetchData: (
     url: string,
     config?: AxiosRequestConfig | undefined
-  ) => Promise<T[]>;
+  ) => Promise<AxiosResponse>;
   authFetch: <T>(url: string, data: T) => Promise<any>;
   accessToken: string | null;
   setAccessToken: React.Dispatch<React.SetStateAction<string | null>>;
@@ -29,16 +29,16 @@ function RootContextProvider({ children }: RootContextProviderProps) {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [tokenExpires, setTokenExpires] = useState<string | null>(null);
 
-  async function fetchData<T>(
+  async function fetchData(
     url: string,
     config?: AxiosRequestConfig | undefined
-  ): Promise<T[]> {
-    const request = await axios<T[]>(url, {
+  ) {
+    const request = await axios(url, {
       headers: { Authorization: `Bearer  ${accessToken}` },
       ...config,
     });
 
-    return request.data;
+    return request;
   }
 
   async function authFetch<T>(url: string, data: T): Promise<any> {

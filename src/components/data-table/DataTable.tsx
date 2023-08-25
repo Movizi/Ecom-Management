@@ -1,50 +1,55 @@
 import "./data-table.css";
 import React, { useState } from "react";
-import { Button, Table } from "antd";
+import { Table, Tooltip } from "antd";
 import { category } from "../../interface/category.interface";
 import { product } from "../../interface/product.interface";
 import { ColumnsType } from "antd/lib/table";
 
-type Item = category | product;
-
 type DataTableProps<T> = {
   data: T[];
+  loading: boolean;
 };
 
-function DataTable<T extends Item>({ data }: DataTableProps<T>) {
+function DataTable<T extends category | product>({
+  data,
+  loading,
+}: DataTableProps<T>) {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-  const [loading, setLoading] = useState(false);
 
-  const start = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setSelectedRowKeys([]);
-      setLoading(false);
-    }, 1000);
-  };
+  const keys = Object.keys(data.length > 0 && data[0]);
 
-  const keys = Object.keys(data[0]);
+  const columns: ColumnsType<category | product> = [
+    ...keys.map((key) => ({
+      title: key,
+      dataIndex: key,
+      key: key,
+      ellipsis: true,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      sorter: (a: any, b: any) => {
+        const aValue = a[key];
+        const bValue = b[key];
 
-  const columns: ColumnsType<T> = keys.map((key) => ({
-    title: key,
-    dataIndex: key,
-    key: key,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    sorter: (a: any, b: any) => {
-      const aValue = a[key];
-      const bValue = b[key];
-
-      if (typeof aValue === "number" && typeof bValue === "number") {
-        // Compare numbers
-        return aValue - bValue;
-      } else {
-        // Compare strings
-        return aValue.toString().localeCompare(bValue.toString());
-      }
+        if (typeof aValue === "number" && typeof bValue === "number") {
+          return aValue - bValue;
+        } else {
+          return aValue.toString().localeCompare(bValue.toString());
+        }
+      },
+    })),
+    {
+      title: "Additional Column",
+      dataIndex: "additionalColumn",
+      key: "additionalColumn",
+      fixed: "right",
+      render: () => (
+        <Tooltip placement="topLeft">
+          <button onClick={() => console.log("clicked")}>click</button>
+        </Tooltip>
+      ),
     },
-  }));
+  ];
 
-  const getKey = (item: T): React.Key => {
+  const getKey = (item: category | product): React.Key => {
     if ("categoryID" in item) {
       return item.categoryID;
     } else if ("productID" in item) {
@@ -63,30 +68,24 @@ function DataTable<T extends Item>({ data }: DataTableProps<T>) {
     onChange: onSelectChange,
   };
 
-  const hasSelected = selectedRowKeys.length > 0;
+  // const hasSelected = selectedRowKeys.length > 0;
 
   return (
-    <div>
-      <div style={{ marginBottom: 16 }}>
-        <Button
-          type="primary"
-          onClick={start}
-          disabled={!hasSelected}
-          loading={loading}
-        >
-          Reload
-        </Button>
-        <span style={{ marginLeft: 8 }}>
-          {hasSelected ? `Selected ${selectedRowKeys.length} items` : ""}
-        </span>
-      </div>
+    <div className="data-table-container">
       <Table
+        tableLayout="fixed"
+        scroll={{ x: 1500, y: 650 }}
         rowSelection={rowSelection}
-        columns={columns}
-        dataSource={data.map((item: T) => ({
-          ...item,
-          key: getKey(item),
-        }))}
+        loading={loading}
+        columns={data.length > 0 ? columns : []}
+        dataSource={
+          data.length > 0
+            ? data.map((item) => ({
+                ...item,
+                key: getKey(item),
+              }))
+            : []
+        }
       />
     </div>
   );
