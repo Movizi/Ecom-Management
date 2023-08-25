@@ -52,7 +52,7 @@ function Categories() {
               </svg>
             }
           />
-          <div className="button add-category">Add category</div>
+          <button className="button add-category">Add category</button>
         </div>
       </div>
       <DataTable<category>
