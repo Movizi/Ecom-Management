@@ -1,6 +1,7 @@
 import "./categories.css";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import { useRootContext } from "../../hooks/useRootContext";
 import DataTable from "../../components/data-table/DataTable";
 import { Input } from "antd";
@@ -52,7 +53,9 @@ function Categories() {
               </svg>
             }
           />
-          <button className="button add-category">Add category</button>
+          <Link to="/portal/categories/add" className="button add-category">
+            Add category
+          </Link>
         </div>
       </div>
       <DataTable<category>

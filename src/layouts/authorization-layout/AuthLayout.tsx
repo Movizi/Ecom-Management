@@ -3,8 +3,14 @@ import AuthAlertContextProvider from "../../context/AuthAlertContextProvider";
 import { Outlet } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import AuthAlert from "../../components/auth-alert/AuthAlert";
+import { useEffect } from "react";
 
 function AuthLayout() {
+  useEffect(() => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("tokenExpires");
+  }, [])
+
   return (
     <AuthAlertContextProvider>
       <Container fluid>

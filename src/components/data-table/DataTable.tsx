@@ -74,9 +74,10 @@ function DataTable<T extends category | product>({
     <div className="data-table-container">
       <Table
         tableLayout="fixed"
-        scroll={{ x: 1500, y: 650 }}
+        scroll={{ x: 1500, y: 700 }}
         rowSelection={rowSelection}
         loading={loading}
+        pagination={{ pageSize: 11 }}
         columns={data.length > 0 ? columns : []}
         dataSource={
           data.length > 0

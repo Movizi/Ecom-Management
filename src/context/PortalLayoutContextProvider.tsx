@@ -5,24 +5,18 @@ type PortalLayoutContextProps = {
 };
 
 export interface PortalLayoutContextType {
-  selectedKey: string | null;
-  setSelectedKey: React.Dispatch<React.SetStateAction<string | null>>;
   collapsed: boolean;
   setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const PortalLayoutContext = createContext<PortalLayoutContextType | null>(
-  null
-);
+export const PortalLayoutContext =
+  createContext<PortalLayoutContextType | null>(null);
 
 function PortalLayoutContextProvider({ children }: PortalLayoutContextProps) {
-  const [selectedKey, setSelectedKey] = useState<string | null>("");
   const [collapsed, setCollapsed] = useState<boolean>(false);
 
   return (
-    <PortalLayoutContext.Provider
-      value={{ selectedKey, setSelectedKey, collapsed, setCollapsed }}
-    >
+    <PortalLayoutContext.Provider value={{ collapsed, setCollapsed }}>
       {children}
     </PortalLayoutContext.Provider>
   );
